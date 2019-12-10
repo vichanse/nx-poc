@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "webshop": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/webshop",
+      "sourceRoot": "apps/webshop/src",
+      "prefix": "jms",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/webshop",
+            "index": "apps/webshop/src/index.html",
+            "main": "apps/webshop/src/main.ts",
+            "polyfills": "apps/webshop/src/polyfills.ts",
+            "tsConfig": "apps/webshop/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/webshop/src/favicon.ico",
+              "apps/webshop/src/assets"
+            ],
+            "styles": ["apps/webshop/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/webshop/src/environments/environment.ts",
+                  "with": "apps/webshop/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "webshop:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "webshop:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "webshop:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/webshop/tsconfig.app.json",
+              "apps/webshop/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/webshop/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/webshop/jest.config.js",
+            "tsConfig": "apps/webshop/tsconfig.spec.json",
+            "setupFile": "apps/webshop/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "webshop-e2e": {
+      "root": "apps/webshop-e2e",
+      "sourceRoot": "apps/webshop-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/webshop-e2e/cypress.json",
+            "tsConfig": "apps/webshop-e2e/tsconfig.e2e.json",
+            "devServerTarget": "webshop:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "webshop:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/webshop-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/webshop-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "webshop"
+}
