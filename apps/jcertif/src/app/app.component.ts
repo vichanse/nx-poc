@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'jWebshop';
-  value = 'jWebshop edit input';
+  title = 'jcertif';
+
+  value = 'jcertif edit input';
   saveValue(value) {
     this.value = value;
   }

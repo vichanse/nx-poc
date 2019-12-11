@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@jms/customer-reference": ["libs/customer-reference/src/index.ts"],
+      "@jms/edit-input": ["libs/edit-input/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

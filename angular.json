@@ -123,6 +123,191 @@
           }
         }
       }
+    },
+    "jcertif": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/jcertif",
+      "sourceRoot": "apps/jcertif/src",
+      "prefix": "jms",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/jcertif",
+            "index": "apps/jcertif/src/index.html",
+            "main": "apps/jcertif/src/main.ts",
+            "polyfills": "apps/jcertif/src/polyfills.ts",
+            "tsConfig": "apps/jcertif/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/jcertif/src/favicon.ico",
+              "apps/jcertif/src/assets"
+            ],
+            "styles": ["apps/jcertif/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/jcertif/src/environments/environment.ts",
+                  "with": "apps/jcertif/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "jcertif:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "jcertif:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "jcertif:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/jcertif/tsconfig.app.json",
+              "apps/jcertif/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/jcertif/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/jcertif/jest.config.js",
+            "tsConfig": "apps/jcertif/tsconfig.spec.json",
+            "setupFile": "apps/jcertif/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "jcertif-e2e": {
+      "root": "apps/jcertif-e2e",
+      "sourceRoot": "apps/jcertif-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/jcertif-e2e/cypress.json",
+            "tsConfig": "apps/jcertif-e2e/tsconfig.e2e.json",
+            "devServerTarget": "jcertif:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "jcertif:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/jcertif-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/jcertif-e2e/**"]
+          }
+        }
+      }
+    },
+    "customer-reference": {
+      "projectType": "library",
+      "root": "libs/customer-reference",
+      "sourceRoot": "libs/customer-reference/src",
+      "prefix": "jms",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/customer-reference/tsconfig.lib.json",
+              "libs/customer-reference/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/customer-reference/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/customer-reference/jest.config.js",
+            "tsConfig": "libs/customer-reference/tsconfig.spec.json",
+            "setupFile": "libs/customer-reference/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "edit-input": {
+      "projectType": "library",
+      "root": "libs/edit-input",
+      "sourceRoot": "libs/edit-input/src",
+      "prefix": "jms",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/edit-input/tsconfig.lib.json",
+              "libs/edit-input/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/edit-input/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/edit-input/jest.config.js",
+            "tsConfig": "libs/edit-input/tsconfig.spec.json",
+            "setupFile": "libs/edit-input/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

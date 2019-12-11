@@ -13,6 +13,18 @@
     },
     "webshop": {
       "tags": []
+    },
+    "jcertif-e2e": {
+      "tags": []
+    },
+    "jcertif": {
+      "tags": []
+    },
+    "customer-reference": {
+      "tags": []
+    },
+    "edit-input": {
+      "tags": []
     }
   }
 }
